@@ -1,0 +1,10 @@
+node_modules
+logs
+yarn-error.log
+frontend/build/public/dist/app.js
+package-lock.json
+*.lock
+.DS_Store
+src/**/*.js
+config/*
+dist

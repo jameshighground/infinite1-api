@@ -1,5 +1,6 @@
 import {FastifyReply} from "fastify";
 import {FastifyRequest} from "fastify";
+import {USER_ERROR_AUTH, USER_ERROR_JWT} from "src/constants/UserConstants";
 function parseJwt(token: string): JSON {
   let base64Url = token.split(".")[1];
   let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -15,33 +16,18 @@ function parseJwt(token: string): JSON {
 }
 
 export const authHandler = async (req: FastifyRequest, reply: FastifyReply) => {
-  const {userid}: any = req.params;
   const {authorization} = req.headers;
   const Bearer: string[] | undefined = authorization?.split(" ");
-  if (Bearer && Bearer.length > 2) {
+  console.log("Bearer >>", Bearer);
+  if (Bearer) {
     const idToken = Bearer[1];
-    console.log("Bearer >>", Bearer, authorization);
+    try {
+      const data: any = parseJwt(idToken);
+      return data;
+    } catch (err) {
+      reply.code(USER_ERROR_JWT.status).send(USER_ERROR_JWT.data);
+    }
+  } else {
+    reply.code(USER_ERROR_AUTH.status).send(USER_ERROR_AUTH.data);
   }
-
-  return "asd";
-  // if (Bearer) {
-  //   const idToken = Bearer[1];
-  //   const {email, exp}: any = parseJwt(idToken);
-  //   const now = new Date().getTime();
-  //   if (String(exp) > String(now)) {
-  //     if (userid) {
-  //       if (userid == email) {
-  //         return "";
-  //       } else {
-  //         reply.code(503).send("fail authorization");
-  //       }
-  //     } else {
-  //       return "";
-  //     }
-  //   } else {
-  //     reply.code(502).send("expired token");
-  //   }
-  // } else {
-  //   reply.code(501).send("need authorization");
-  // }
 };

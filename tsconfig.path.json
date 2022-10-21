@@ -4,10 +4,10 @@
     "paths": {
       "@config/*": ["config/*"],
       "@lib/*": ["src/lib/*"],
+      "@entity/*": ["src/entity/*"],
       "@utils/*": ["src/utils/*"],
       "@routes/*": ["src/routes/*"],
-      "@api/*": ["src/routes/api/*"],
-      "@community/*": ["src/app/community/*"]
+      "@api/*": ["src/routes/api/*"]
     }
   }
 }

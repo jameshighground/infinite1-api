@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/node_modules/axios/dist/axios.js"></script>
+  </head>
+  <body>
+    sss
+  </body>
+  <script>
+    init();
+    async function init() {
+      try {
+        const {data} = await axios.get("/api/v1/test", {
+          headers: {
+            authorization:
+              "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+          },
+        });
+        console.log("data >>", data);
+      } catch (err) {
+        console.log(err);
+        // if (err.response) {
+        //   const {
+        //     response: {data, status},
+        //   } = err;
+        //   console.log(status, data);
+        // } else {
+        //   console.log(err);
+        // }
+      }
+    }
+  </script>
+</html>

@@ -5,6 +5,7 @@ export default async function (fastify: FastifyInstance) {
     reply.view("/views/moving.html");
   });
   fastify.get("/", (_: FastifyRequest, reply: FastifyReply) => {
-    reply.view("/views/main.html");
+    // reply.view("/views/main.html");
+    reply.send("hello infinite!");
   });
 }

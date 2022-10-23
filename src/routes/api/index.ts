@@ -1,20 +1,8 @@
-import {authHandler} from "@utils/OAuth2Utils";
-import {FastifyInstance, FastifyRequest, FastifyReply} from "fastify";
+import {FastifyInstance} from "fastify";
 import pray from "./pray";
+import user from "./pray/user";
 
 export default async function (fastify: FastifyInstance) {
   fastify.register(pray, {prefix: "/pray"});
-
-  fastify.get("/", async (req: FastifyRequest, reply: FastifyReply) => {
-    reply.send("hi");
-  });
-
-  fastify.route({
-    method: "GET",
-    url: "/test",
-    preHandler: authHandler,
-    handler: async (req: FastifyRequest, reply: FastifyReply) => {
-      reply.send("test!!");
-    },
-  });
+  fastify.register(user, {prefix: "/:userid/pray"});
 }

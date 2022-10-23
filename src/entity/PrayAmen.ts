@@ -1,4 +1,4 @@
-import {Entity, Column, BaseEntity, CreateDateColumn, PrimaryColumn, ManyToOne, JoinColumn, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, BaseEntity, CreateDateColumn, ManyToOne, JoinColumn, PrimaryGeneratedColumn} from "typeorm";
 import PrayArticle from "./PrayArticle";
 @Entity()
 export default class PrayAmen extends BaseEntity {

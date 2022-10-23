@@ -24,7 +24,7 @@ export async function getPrayArticleListByLatLng({userid, lat, lng}: {userid: st
   return await PrayArticle.query(query, [userid, lat, lng]);
 }
 export async function getPrayArticleByUserid(userid: string) {
-  return await PrayArticle.find({where: {userid}, order: {createDate: "DESC"}});
+  return await PrayArticle.find({where: {userid}, order: {createDate: "DESC"}, relations: {amen: true}});
 }
 export async function addPrayArticle(article: any) {
   return await txProcess(async manager => {

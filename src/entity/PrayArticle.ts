@@ -1,8 +1,12 @@
-import {Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn} from "typeorm";
+import {Entity, Column, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm";
+import PrayAmen from "./PrayAmen";
 @Entity()
 export default class PrayArticle extends BaseEntity {
   @PrimaryGeneratedColumn({type: "bigint"})
   id: number;
+
+  @Column({default: 0})
+  refid: number;
 
   @Column()
   userid: string;
@@ -21,6 +25,9 @@ export default class PrayArticle extends BaseEntity {
 
   @Column()
   content: string;
+
+  @OneToMany(() => PrayAmen, amen => amen.article)
+  amen: PrayAmen;
 
   @CreateDateColumn()
   createDate: Date;

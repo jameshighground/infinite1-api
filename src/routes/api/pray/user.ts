@@ -23,9 +23,8 @@ export default async function (fastify: FastifyInstance) {
       reply.send(prays);
     }
   });
-  fastify.post("/:articleid", async (req: FastifyRequest<{Params: {userid: string}; Body: {articleid: number}}>, reply: FastifyReply) => {
-    const {userid} = req.params;
-    const {articleid} = req.body;
+  fastify.post("/:articleid", async (req: FastifyRequest<{Params: {userid: string; articleid: number}}>, reply: FastifyReply) => {
+    const {userid, articleid} = req.params;
     const amen = await addPrayAmen({articleid, userid});
     reply.send(amen);
   });

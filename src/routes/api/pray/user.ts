@@ -2,6 +2,7 @@ import {authHandler} from "@utils/OAuth2Utils";
 import {FastifyReply, FastifyRequest, FastifyInstance} from "fastify";
 import {USER_ERROR_LATLNG} from "src/constants/UserConstants";
 import PrayArticle from "src/entity/PrayArticle";
+import {addPrayAmen} from "src/service/PrayAmenService";
 import {addPrayArticle, getPrayArticleByUserid, getPrayArticleListByLatLng} from "src/service/PrayArticleService";
 
 export default async function (fastify: FastifyInstance) {
@@ -21,6 +22,12 @@ export default async function (fastify: FastifyInstance) {
       const prays = await addPrayArticle({...article, userid});
       reply.send(prays);
     }
+  });
+  fastify.post("/:articleid", async (req: FastifyRequest<{Params: {userid: string}; Body: {articleid: number}}>, reply: FastifyReply) => {
+    const {userid} = req.params;
+    const {articleid} = req.body;
+    const amen = await addPrayAmen({articleid, userid});
+    reply.send(amen);
   });
 
   fastify.get("/", async (req: FastifyRequest<{Params: {userid: string}}>, reply: FastifyReply) => {
